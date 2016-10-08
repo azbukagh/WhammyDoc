@@ -7,7 +7,7 @@ block ddox.defs
 
 block ddox.title
 	- title = "Module " ~ info.mod.qualifiedName;
-	
+
 block ddox.description		
 	p!= info.formatDoc(info.mod.docGroup, 2, sec => sec == "$Short")
 
@@ -18,19 +18,19 @@ block ddox.sections
 	
 block ddox.members
 	- alias TypeTuple!(FunctionDeclaration, InterfaceDeclaration, ClassDeclaration, StructDeclaration, UnionDeclaration, EnumDeclaration, TemplateDeclaration) kinds;
-	- auto kindnames =      ["Functions", "Interfaces", "Classes", "Structs", "Unions", "Enums", "Templates"];
-	- auto kindnames_sing = ["Function",  "Interface",  "Class",   "Struct",  "Union",  "Enum",  "Template"];
+	- auto kindnames = ["Functions", "Interfaces", "Classes", "Structs", "Unions", "Enums", "Templates"];
+	- auto kindnames_sing = ["Function", "Interface", "Class", "Struct", "Union", "Enum", "Template"];
 
-	- foreach( i, kind; kinds )
-		- if( hasChild!kind(info.mod) )
+	- foreach(i, kind; kinds)
+		- if(hasChild!kind(info.mod))
 			section
 				h2= kindnames[i]
-				table
+				table.table.table-striped
 					col.caption
 					tr
 						th Name
 						th Description
-					- foreach( grp; getDocGroups!kind(info.mod) )
+					- foreach(grp; getDocGroups!kind(info.mod))
 						tr
 							td
 								a(id="#{grp.name}", class=declStyleClasses(grp), href="#{info.linkTo(grp)}")
@@ -38,26 +38,26 @@ block ddox.members
 							td!= info.formatDoc(grp.docGroup, 3, sec => sec == "$Short")
 
 	- alias TypeTuple!(EnumMemberDeclaration, VariableDeclaration, AliasDeclaration) tkinds;
-	- auto tkindnames =      ["Enum values", "Global variables", "Aliases"];
-	- auto tkindnames_sing = ["Enum value",  "Variable",  "Alias"];
+	- auto tkindnames = ["Enum values", "Global variables", "Aliases"];
+	- auto tkindnames_sing = ["Enum value", "Variable", "Alias"];
 
-	- foreach( i, kind; tkinds )
-		- if( hasChild!kind(info.mod) )
+	- foreach(i, kind; tkinds)
+		- if(hasChild!kind(info.mod))
 			section
 				h2 #{tkindnames[i]}
-				table
+				table.table.table-striped
 					col.caption
 					tr
 						th Name
 						th Type
 						th Description
-					- foreach( f; getDocGroups!kind(info.mod)  )
+					- foreach(f; getDocGroups!kind(info.mod))
 						tr
 							td
 								a(id="#{f.name}", class=declStyleClasses(f), href="#{info.linkTo(f)}")
 									code= f.name
 							td
-								- if( f.type )
+								- if(f.type)
 									|!= info.formatType(f.type)
 							td!= info.formatDoc(f.docGroup, 3, sec => sec == "$Short")
 
