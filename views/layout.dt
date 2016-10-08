@@ -1,0 +1,20 @@
+!!! 5
+html
+	head
+		meta(charset="UTF-8")
+		- string title;
+		block title
+		title= title
+		link(rel="stylesheet", type="text/css", href="#{info.linkTo(null)}css/main.css")
+		script(type="text/javascript", src="#{info.linkTo(null)}scripts/jquery.js")/**/
+	body
+		.container-fluid
+			.row
+				.col-sm-2.col-xs-12#navigation
+					.navigation
+						block navigation
+				.col-sm-10.col-xs-12
+					.page-header
+						h1= title
+					block body
+

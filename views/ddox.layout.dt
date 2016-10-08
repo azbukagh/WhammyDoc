@@ -1,0 +1,28 @@
+extends layout
+
+block title
+	block ddox.defs
+	block ddox.title
+
+block navigation
+	include ddox.inc.module-list
+	include ddox.inc.symbol-search
+
+block body
+	block ddox.description
+
+	block ddox.sections
+
+	block ddox.members
+
+	section
+		h2 Authors
+		block ddox.authors
+
+	section
+		h2 Copyright
+		block ddox.copyright
+
+	section
+		h2 License
+		block ddox.license

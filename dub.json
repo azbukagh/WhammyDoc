@@ -1,0 +1,15 @@
+{
+	"name": "whammydoc",
+	"authors": [
+		"Azbuka"
+	],
+	"dependencies": {
+		"ddox": "~>0.15.15",
+		"vibe-d:core": "~>0.7.30-rc.1",
+		"vibe-d:data": "~>0.7.30-rc.1",
+		"vibe-d:http": "~>0.7.30-rc.1"
+	},
+	"description": "Documentation generator based on ddox",
+	"copyright": "Copyright © 2016, Azbuka",
+	"license": "MIT"
+}
