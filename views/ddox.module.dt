@@ -61,9 +61,17 @@ block ddox.members
 									|!= info.formatType(f.type)
 							td!= info.formatDoc(f.docGroup, 3, sec => sec == "$Short")
 
-block ddox.authors
-	|!= info.formatDoc(info.mod.docGroup, 0, sec => sec == "Authors")
-block ddox.license
-	|!= info.formatDoc(info.mod.docGroup, 0, sec => sec == "License")
-block ddox.copyright
-	|!= info.formatDoc(info.mod.docGroup, 0, sec => sec == "Copyright")
+block wdoc.ainfo
+	- if(info.mod.docGroup.comment.hasSection("Authors"))
+		section
+			h2 Authors
+				|!= info.formatDoc(info.mod.docGroup, 0, sec => sec == "Authors")
+	- if(info.mod.docGroup.comment.hasSection("License"))
+		section
+			h2 License
+				|!= info.formatDoc(info.mod.docGroup, 0, sec => sec == "License")
+	- if(info.mod.docGroup.comment.hasSection("Copyright"))
+		section
+			h2 Copyright
+				|!= info.formatDoc(info.mod.docGroup, 0, sec => sec == "Copyright")
+

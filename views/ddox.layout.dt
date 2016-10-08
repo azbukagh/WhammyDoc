@@ -15,14 +15,5 @@ block body
 
 	block ddox.members
 
-	section
-		h2 Authors
-		block ddox.authors
+	block wdoc.ainfo
 
-	section
-		h2 Copyright
-		block ddox.copyright
-
-	section
-		h2 License
-		block ddox.license
