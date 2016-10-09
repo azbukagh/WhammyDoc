@@ -48,17 +48,17 @@ block ddox.members
 				table.table.table-striped
 					col.caption
 					tr
-						th Name
 						th Type
+						th Name
 						th Description
 					- foreach(f; getDocGroups!kind(info.mod))
 						tr
 							td
-								a(id="#{f.name}", class=declStyleClasses(f), href="#{info.linkTo(f)}")
-									code= f.name
-							td
 								- if(f.type)
 									|!= info.formatType(f.type)
+							td
+								a(id="#{f.name}", class=declStyleClasses(f), href="#{info.linkTo(f)}")
+									code= f.name
 							td!= info.formatDoc(f.docGroup, 3, sec => sec == "$Short")
 
 block wdoc.ainfo

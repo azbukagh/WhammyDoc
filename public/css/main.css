@@ -1457,8 +1457,8 @@ samp {
 code {
   padding: 2px 4px;
   font-size: 90%;
-  color: #c7254e;
-  background-color: #f9f2f4;
+  color: #4D4D4C;
+  background-color: #f3f3f3;
   border-radius: 4px; }
 
 kbd {
@@ -5816,3 +5816,6 @@ button.close {
 
 #navigation {
   padding: 1em; }
+
+pre span.typ {
+  color: #428bca; }

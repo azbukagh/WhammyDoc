@@ -1,6 +1,13 @@
+$code-color:	#4D4D4C;
+$code-bg:	#f3f3f3;
+
 @import "bootstrap";
 
 #navigation {
 	padding: 1em;
+}
+
+pre span.typ {
+	color: #428bca;
 }
 
