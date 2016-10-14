@@ -6,8 +6,8 @@ html
 		block title
 		title= title
 		link(rel="stylesheet", type="text/css", href="#{info.linkTo(null)}css/main.css")
-		script(type="text/javascript", src="#{info.linkTo(null)}scripts/jquery.js")/**/
-	body
+		script(type="text/javascript", src="#{info.linkTo(null)}js/main.js")/**/
+	body(onload = 'WhammyDocOnLoad();')
 		.container-fluid
 			.row
 				.col-sm-2.col-xs-12#navigation

@@ -1,19 +1,31 @@
-extends layout
+!!! 5
+html
+	head
+		meta(charset="UTF-8")
+		- string title;
+		block ddox.defs
+		block ddox.title
+		title= title
+		link(rel="stylesheet", type="text/css", href="#{info.linkTo(null)}css/main.css")
+		script(type="text/javascript", src="#{info.linkTo(null)}js/main.js")/**/
+	body(onload = 'WhammyDocOnLoad();')
+		.container-fluid
+			.row
+				.col-sm-2.col-xs-12#navigation
+					.navigation
+						include ddox.inc.module-list
+				.col-sm-8.col-xs-12
+					.page-header
+						h1= title
+					block ddox.description
 
-block title
-	block ddox.defs
-	block ddox.title
+					block ddox.sections
 
-block navigation
-	include ddox.inc.module-list
-	include ddox.inc.symbol-search
+					block ddox.members
 
-block body
-	block ddox.description
-
-	block ddox.sections
-
-	block ddox.members
-
-	block wdoc.ainfo
+					block wdoc.ainfo
+				.col-sm-2.col-xs-12
+					include ddox.inc.symbol-search
+					ul#symbolSearchResults(style="display: none")
+		script(type="application/javascript", src="#{info.linkTo(null)}symbols.js")
 

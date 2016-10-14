@@ -7,57 +7,56 @@
 	- auto cls_item = cast(ClassDeclaration)item;
 	- auto intf_item = cast(InterfaceDeclaration)item;
 
-	- if (item.templateArgs.length)
+	- if(item.templateArgs.length)
 		section
 			h3 Template arguments
 
 			.prototype
-				code.lang-d <span class="kwd">#{item.kind.to!string.toLower()}</span> <span class="typ">#{item.name}</span>!{highlightDCode(item.templateArgsString)}#{item.templateConstraint.length?"":";"}
+				pre.lang-d <span class="kwd">#{item.kind.to!string.toLower()}</span> <span class="typ">#{item.name}</span>!{highlightDCode(item.templateArgsString)}#{item.templateConstraint.length?"":";"}
 					- if (item.templateConstraint.length)
-						br
 						| <span class="kwd">if</span> <span class="pun">(</span>!{highlightDCode(item.templateConstraint)}<span class="pun">);</span>
 
-	- if( cls_item && (cls_item.baseClass || cls_item.derivedInterfaces.length) )
+	- if(cls_item && (cls_item.baseClass || cls_item.derivedInterfaces.length))
 		section
 			h3 Inherits from
 
 			ul
-				- if( cls_item.baseClass )
+				- if(cls_item.baseClass)
 					li
 						code.prettyprint.lang-d!= info.formatType(cls_item.baseClass, false)
 						| (base class)
-				- foreach( intf; cls_item.derivedInterfaces )
+				- foreach(intf; cls_item.derivedInterfaces)
 					li
 						code.prettyprint.lang-d!= info.formatType(intf, false)
 
-	- if( intf_item && intf_item.derivedInterfaces.length )
+	- if(intf_item && intf_item.derivedInterfaces.length)
 		section
 			h3 Inherits from
 
 			ul
-				- foreach( intf; intf_item.derivedInterfaces )
+				- foreach(intf; intf_item.derivedInterfaces)
 					li
 						code.prettyprint.lang-d!= info.formatType(intf, false)
 
 
 - void outputCompositeMembers(CompositeTypeDeclaration item)
 	- alias TypeTuple!(InterfaceDeclaration, ClassDeclaration, StructDeclaration, UnionDeclaration, EnumDeclaration, AliasDeclaration, TemplateDeclaration) kinds;
-	- auto kindnames =      ["Inner interfaces", "Inner classes", "Inner structs", "Unions", "Enums", "Aliases", "Templates"];
-	- auto kindnames_sing = ["Inner interface",  "Inner class",   "Inner struct",  "Union",  "Enum",  "Alias",   "Template"];
+	- auto kindnames = ["Inner interfaces", "Inner classes", "Inner structs", "Unions", "Enums", "Aliases", "Templates"];
+	- auto kindnames_sing = ["Inner interface", "Inner class", "Inner struct", "Union", "Enum", "Alias", "Template"];
 
 	- FunctionDeclaration[] properties, methods, constructors;
-	- foreach( itm; getDocGroups!FunctionDeclaration(item) )
-		- if( itm.hasAttribute("@property") )
+	- foreach(itm; getDocGroups!FunctionDeclaration(item))
+		- if(itm.hasAttribute("@property"))
 			- properties ~= itm;
-		- else if( itm.name != "this" )
+		- else if(itm.name != "this")
 			- methods ~= itm;
 		- else
 			- constructors ~= itm;
 
-	- if( constructors.length )
+	- if(constructors.length)
 		section
 			h3 Constructors
-			table
+			table.table.table-striped
 				col.caption
 				tr
 					th Name
@@ -69,65 +68,65 @@
 								code= p.name
 						td!= info.formatDoc(p.docGroup, 3, sec => sec == "$Short")
 
-	- if( hasChild!VariableDeclaration(item) )
+	- if(hasChild!VariableDeclaration(item))
 		section
 			h3 Fields
-			table
+			table.table.table-striped
 				col.caption
 				tr
-					th Name
 					th Type
+					th Name
 					th Description
 				- foreach( f; getChildren!VariableDeclaration(item) )
 					tr
+						td.typecol!= info.formatType(f.type)
 						td
 							a(href="#{info.linkTo(f)}", class=declStyleClasses(f)) <code>#{f.name}</code>
-						td.typecol!= info.formatType(f.type)
 						td!= info.formatDoc(f.docGroup, 3, sec => sec == "$Short")
 
-	- if( properties.length )
+	- if(properties.length)
 		section
 			h3 Properties
-			table
+			table.table.table-striped
 				col.caption
 				tr
-					th Name
 					th Type
+					th Name
 					th Description
 				- foreach( p; properties )
 					- auto mems = p.docGroup ? p.docGroup.members : [cast(Entity)p];
 					tr
+						td.typecol!= info.formatType(getPropertyType(mems))
 						td
 							a(href="#{info.linkTo(p)}", class=declStyleClasses(p)) <code>#{p.name}</code>
 							span.tableEntryAnnotation= anyPropertyGetter(mems) ? anyPropertySetter(mems) ? "[get, set]" : "[get]" : "[set]"
-						td.typecol!= info.formatType(getPropertyType(mems))
 						td!= info.formatDoc(p.docGroup, 3, sec => sec == "$Short")
 
-	- if( methods.length )
+	- if(methods.length)
 		section
 			h3 Methods
-			table
+			table.table.table-striped
 				col.caption
 				tr
 					th Name
 					th Description
-				- foreach( p; methods )
+				- foreach(p; methods)
 					tr
 						td
 							a(href="#{info.linkTo(p)}", class=declStyleClasses(p))
 								code= p.name
 						td!= info.formatDoc(p.docGroup, 3, sec => sec == "$Short")
 
-	- foreach( i, kind; kinds )
-		- if( hasChild!kind(item) )
+	- foreach(i, kind; kinds)
+		- if(hasChild!kind(item))
 			section
 				h3= kindnames[i]
-				table
+				table.table.table-striped
 					col.caption
 					tr
 						th Name
 						th Description
-					- foreach( grp; getDocGroups!kind(item) )
+					- foreach(grp; getDocGroups!kind(item))
 						tr
 							td
 								a(href="#{info.linkTo(grp)}", class=declStyleClasses(grp))

@@ -6,7 +6,7 @@
 	section
 		h3 Declaration
 		.prototype
-			code.lang-d
+			pre.lang-d
 				- string value;
 				- string terminator = "<span class=\"pun\">;</span>";
 				- string attributes;
@@ -44,16 +44,11 @@
 						|<span class="kwd">#{toLower(to!string(ctd.kind))}</span> <a href="#{info.linkTo(ctd)}"><span class="typ">#{ctd.nestedName}</span></a>
 					- else
 						|<a href="#{info.linkTo(item.parent)}">!{highlightDCode(item.parent.qualifiedName)}</a>
-					br
 					span.pun {
-					br
 					|&nbsp;&nbsp;<span class="com">// ...</span>
-					br
 					- if (value.length)
 						|&nbsp;&nbsp;!{attributes}!{itemname} <span class="pun">=</span> !{value}!{terminator}
 					- else
 						|&nbsp;&nbsp;!{attributes}!{itemname}!{terminator}
-					br
 					|&nbsp;&nbsp;<span class="com">// ...</span>
-					br
 					span.pun }

@@ -29,7 +29,7 @@ gulp.task('watch', function() {
 	gulp.watch('./sass/**/*.scss', function() {
 		gulp.start('sass');
 	});
-	gulp.watch('./js/**/*', function() {
+	gulp.watch('./js/**/*.js', function() {
 		gulp.start('js');
 	});
 });

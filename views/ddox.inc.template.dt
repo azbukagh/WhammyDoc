@@ -8,7 +8,7 @@
 		h2 Arguments
 
 		.prototype
-			code.lang-d
+			pre.lang-d
 				|<span class="kwd">template</span> <span class="pln">#{item.name}</span>!{highlightDCode(item.templateArgsString)};
 
 - void outputTemplateMembers(TemplateDeclaration item)
@@ -16,10 +16,10 @@
 	- auto kindnames =      ["Functions", "Interfaces", "Classes", "Structs", "Unions", "Enums", "Aliases", "Templates"];
 	- auto kindnames_sing = ["Function",  "Interface",  "Class",   "Struct",  "Union",  "Enum",  "Alias",   "Template"];
 
-	- if( hasChild!VariableDeclaration(item) )
+	- if(hasChild!VariableDeclaration(item))
 		section
 			h3 Variables
-			table
+			table.table.table-striped
 				col.caption
 				tr
 					th Field name
@@ -34,11 +34,11 @@
 						td.typecol!= info.formatType(f.type)
 						td!= info.formatDoc(f.docGroup, 3, sec => sec == "$Short")
 
-	- foreach( i, kind; kinds )
-		- if( hasChild!kind(item) )
+	- foreach(i, kind; kinds)
+		- if(hasChild!kind(item))
 			section
 				h3= kindnames[i]
-				table
+				table.table.table-striped
 					col.caption
 					tr
 						th #{kindnames_sing[i]} name
