@@ -12,9 +12,11 @@ html
 		.container-fluid
 			.row
 				.col-sm-2.col-xs-12#navigation
+					include ddox.inc.symbol-search
 					.navigation
 						include ddox.inc.module-list
-				.col-sm-8.col-xs-12
+					ul#searchResults
+				.col-sm-10.col-xs-12
 					.page-header
 						h1= title
 					block ddox.description
@@ -24,8 +26,5 @@ html
 					block ddox.members
 
 					block wdoc.ainfo
-				.col-sm-2.col-xs-12
-					include ddox.inc.symbol-search
-					ul#symbolSearchResults(style="display: none")
 		script(type="application/javascript", src="#{info.linkTo(null)}symbols.js")
 

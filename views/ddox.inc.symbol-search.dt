@@ -1,7 +1,6 @@
 noscript
 	p.alert.alert-danger(role='alert') The search functionality needs JavaScript enabled
 
-.panel.panel-default#search(style="display: none")
-	p
-		input#symbolSearch(type="text", placeholder="Search for symbols", onchange="symbolSearch();", onkeypress="this.onchange();", onpaste="this.onchange();", oninput="this.onchange();", autofocus=info.settings.focusSearchField)
+#search(style='display: none;')
+	input.form-control#symbolSearch(type="text", placeholder="Search...", onchange="symbolSearch();", onkeypress="this.onchange();", onpaste="this.onchange();", oninput="this.onchange();", autofocus=info.settings.focusSearchField)
 
