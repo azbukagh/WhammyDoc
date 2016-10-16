@@ -5822,5 +5822,11 @@ button.close {
   right: 1em;
   top: 1em; }
 
+#searchResults {
+  padding: 2em; }
+
+#search-btn {
+  outline: 0; }
+
 span.typ {
   color: #428bca; }

@@ -23,6 +23,16 @@ function setResults(v) {
 	document.getElementById("searchResults").innerHTML = v;
 }
 
+function pushResult(v) {
+	document.getElementById("searchResults").innerHTML =
+		document.getElementById("searchResults").innerHTML + v;
+}
+
+function symbolSearchKey(event) {
+	if(event.keyCode == 13)
+		symbolSearch();
+}
+
 function symbolSearch() {
 	var searchstring = document.getElementById("symbolSearch").value.toLowerCase();
 
@@ -34,11 +44,12 @@ function symbolSearch() {
 	var results = [];
 	for(i in symbols) {
 		var sym = symbols[i];
-		if(sym.name.toLowerCase().indexOf(searchstring) < 0) {
+		if(sym.name.toLowerCase().indexOf(searchstring) < 0)
 			continue;
-		}
 
 		results.push(sym);
+		if(results.length == 100)
+			break;
 	}
 
 	function compare(a, b) {
@@ -77,8 +88,11 @@ function symbolSearch() {
 	}
 
 	results.sort(compare);
+
 	var ul = document.createElement("ul");
-	for(i = 0; i < results.length && i < 100; i++) {
+	ul.className = "list-unstyled";
+	ul.id = "results-list";
+	for(i = 0; i < results.length; i++) {
 			var sym = results[i];
 
 			var el = document.createElement("li");
@@ -93,7 +107,7 @@ function symbolSearch() {
 				ul.innerHTML + el.outerHTML;
 	}
 
-	setResults(ul.outerHTML +
-		"<button onclick='hideResults();' 'type='button' id='results-close' class='close btn-lg' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+	pushResult(ul.outerHTML);
+	pushResult("<button onclick='hideResults();' 'type='button' id='results-close' class='close btn-lg' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
 	showResults();
 }
