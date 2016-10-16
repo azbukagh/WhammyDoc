@@ -24,7 +24,7 @@ gulp.task('fonts', function() {
 gulp.task('watch', function() {
 	gulp.start('sass');
 	gulp.start('js');
-	gulp.start('fonts');
+	//gulp.start('fonts');
 	
 	gulp.watch('./sass/**/*.scss', function() {
 		gulp.start('sass');
@@ -42,8 +42,8 @@ gulp.task('build', function() {
 	gulp.src(['./js/**/*.js', '!./js/**/_*.js'])
 		.pipe(rigger())
 		.pipe(uglify())
-		.pipe(gulp.dest('./public/js'));
-	gulp.src('./fonts/**/*')
-		.pipe(gulp.dest('./public/fonts'));
+		.pipe(gulp.dest('../public/js'));
+//	gulp.src('./fonts/**/*')
+//		.pipe(gulp.dest('../public/fonts'));
 });
 
