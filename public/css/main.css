@@ -5817,8 +5817,10 @@ button.close {
 #navigation {
   padding: 1em; }
 
-#search {
-  padding: 0.1em; }
+#results-close {
+  position: absolute;
+  right: 1em;
+  top: 1em; }
 
 span.typ {
   color: #428bca; }

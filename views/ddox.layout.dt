@@ -15,8 +15,7 @@ html
 					include ddox.inc.symbol-search
 					.navigation
 						include ddox.inc.module-list
-					ul#searchResults
-				.col-sm-10.col-xs-12
+				.col-sm-10.col-xs-12#content
 					.page-header
 						h1= title
 					block ddox.description
@@ -26,5 +25,8 @@ html
 					block ddox.members
 
 					block wdoc.ainfo
+				.col-sm-10.col-xs-12#searchResults
 		script(type="application/javascript", src="#{info.linkTo(null)}symbols.js")
-
+		- import vibe.data.json;
+		script(type="application/javascript").
+			var symbolSearchRootDir = #{Json(info.linkTo(null)).toString()};

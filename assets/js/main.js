@@ -6,20 +6,30 @@ function WhammyDocOnLoad() {
 		tables.item(i).className = "table table-stripped";
 	}
 
-	document.getElementById("search").style.display = 'block';
+	document.getElementById("search").style.display = 'table';
 }
 
-var searchCounter = 0;
-var lastSearchString = "";
+function hideResults() {
+	document.getElementById("searchResults").style.display = 'none';
+	document.getElementById("content").style.display = 'block';
+}
+
+function showResults() {
+	document.getElementById("searchResults").style.display = 'block';
+	document.getElementById("content").style.display = 'none';
+}
+
+function setResults(v) {
+	document.getElementById("searchResults").innerHTML = v;
+}
+
 function symbolSearch() {
 	var searchstring = document.getElementById("symbolSearch").value.toLowerCase();
 
-	if(searchstring == lastSearchString) return;
-	lastSearchString = searchstring;
+	if(!searchstring) return;
 
-	var scnt = ++searchCounter;
-	document.getElementById("searchResults").style.display = 'none';
-	document.getElementById("searchResults").innerHTML = '';
+	hideResults();
+	setResults('');
 
 	var results = [];
 	for(i in symbols) {
@@ -67,8 +77,8 @@ function symbolSearch() {
 	}
 
 	results.sort(compare);
-
-	for (i = 0; i < results.length && i < 100; i++) {
+	var ul = document.createElement("ul");
+	for(i = 0; i < results.length && i < 100; i++) {
 			var sym = results[i];
 
 			var el = document.createElement("li");
@@ -78,22 +88,13 @@ function symbolSearch() {
 
 			var name = sym.name;
 
-			// compute a length limited representation of the full name
-			var nameparts = name.split(".");
-			var np = nameparts.length-1;
-			var shortname = "." + nameparts[np];
-			while (np > 0 && nameparts[np-1].length + shortname.length <= 20) {
-				np--;
-				shortname = "." + nameparts[np] + shortname;
-			}
-			if (np > 0) shortname = ".." + shortname;
-			else shortname = shortname.substr(1);
+			el.innerHTML = el.innerHTML + '<a href="./'+symbolSearchRootDir+sym.path+'" title="'+name+'" tabindex="1001">'+name+'</a>';
+			ul.innerHTML =
+				ul.innerHTML + el.outerHTML;
+	}
 
-			el.innerHTML = el.innerHTML + '<a href="./'+sym.path+'" title="'+name+'" tabindex="1001">'+shortname+'</a>';
-			document.getElementById("searchResults").innerHTML =
-				document.getElementById("searchResults").innerHTML + el.outerHTML;
-		}
-
-	document.getElementById("symbolSearch").style.display = 'block';
+	setResults(ul.outerHTML +
+		"<button onclick='hideResults();' 'type='button' id='results-close' class='close btn-lg' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+	showResults();
 }
 

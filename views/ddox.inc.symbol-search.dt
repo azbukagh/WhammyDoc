@@ -1,6 +1,7 @@
 noscript
 	p.alert.alert-danger(role='alert') The search functionality needs JavaScript enabled
 
-#search(style='display: none;')
-	input.form-control#symbolSearch(type="text", placeholder="Search...", onchange="symbolSearch();", onkeypress="this.onchange();", onpaste="this.onchange();", oninput="this.onchange();", autofocus=info.settings.focusSearchField)
-
+.input-group#search(style='display: none;')
+	input.form-control#symbolSearch(type="text", placeholder="Search for...")
+	span.input-group-btn
+		button.btn.btn-primary(type='button', onclick="symbolSearch();") Go!

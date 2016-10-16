@@ -7,8 +7,10 @@ $code-bg:	#f3f3f3;
 	padding: 1em;
 }
 
-#search {
-	padding: 0.1em;
+#results-close {
+	position: absolute;
+	right: 1em;
+	top: 1em;
 }
 
 span.typ {
