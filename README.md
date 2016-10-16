@@ -6,8 +6,8 @@ Just use it like ddox. Do not forget to copy `./public/` directory content when 
 
 ## Hacking
 Requiments:
-	- [dub](http://code.dlang.org/getting_started)
-	- [npm](https://www.npmjs.com/get-npm)
+	* [dub](http://code.dlang.org/getting_started)
+	* [npm](https://www.npmjs.com/get-npm)
 
 Use dub to build application.
 
@@ -16,5 +16,5 @@ Run `gulp build` to build CSS/JS.
 `gulp watch` watches for changes and automatically builds CSS/JS.
 
 ## Examples
-	- [glfw3d](https://azbukagh.github.io/glfw3d/)
+	* [glfw3d](https://azbukagh.github.io/glfw3d/)
 
